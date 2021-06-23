@@ -5,7 +5,7 @@ import MovieFooter from './components/mvFooter';
 function App() {
   return (
     <div className="App container mt-3">
-      {/* <MyHeader /> */}
+  
       <MovieTable />
       <MovieFooter />
     </div>
