@@ -1,0 +1,16 @@
+/ 1 prisideti bootstrap@4.6
+// 2 isitrauksim bootsrap css
+
+// 3 sugeneruosi lentele su movie duomenimis
+//https://getbootstrap.com/docs/4.6/content/tables/
+
+// 4 prisideti dar viena stulpeli ir jamae turetu buti delete mygtukas
+
+// 5 prisideti bootstrap ar ne bootsrap headeri kaip atskira komponenta i
+// app.js virs lenteles komponento
+
+// 6 prisideti footeri kaip atsikra komponenta zemiau lenteles
+// footeryje turetu buti siandienos data dinamiskai
+
+// 7 prisideti lorem trumpsum aside su antraste desinene nuo lenteles
+// kaip atskira komponenta
