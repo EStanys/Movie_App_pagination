@@ -19,7 +19,7 @@ class MoviesTable extends Component {
   renderSortItem = (iconColumn) => {
      const { sortBy, order } = this.props.sortColumn;
 
-     const sortIconClassName = order === 'desc' ? 'fa fa-sort-desc' : 'fa fa-sort-asc';
+     const sortIconClassName = `fa fa-sort-${order}`
     
       return sortBy === iconColumn && <i className={sortIconClassName}></i>;
     
