@@ -1,12 +1,12 @@
 import './App.css';
-import MovieTable from './components/movieTable';
+import Movies from './components/movies';
 import MovieFooter from './components/mvFooter';
 
 function App() {
   return (
     <div className="App container mt-3">
       {/* <MyHeader /> */}
-      <MovieTable />
+      <Movies />
       <MovieFooter />
     </div>
   );

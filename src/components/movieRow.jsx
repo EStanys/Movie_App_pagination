@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 class MovieRow extends Component {
   state = {};
   render() {
-    const { movie } = this.props;
+    // console.log('this.props', this.props);
+    const { movie, onDelete } = this.props;
     return (
       <tr>
         <td>{movie.title}</td>
@@ -11,7 +12,7 @@ class MovieRow extends Component {
         <td>{movie.numberInStock}</td>
         <td>{movie.dailyRentalRate}</td>
         <td>
-          <button onClick={() => this.props.onDelete(movie._id)} className="btn btn-danger btn-sm">
+          <button onClick={() => onDelete(movie._id)} className="btn btn-danger btn-sm">
             Delete
           </button>
         </td>
