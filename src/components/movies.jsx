@@ -5,13 +5,13 @@ import MovieRow from './movieRow';
 import Pagination from './common/pagination'
 import paginate from '../utilities/paginate';
 import ListGroup from './common/listGroup';
-class MovieTable extends Component {
+class Movies extends Component {
   state = {
     movies: [],
     genres: [],
     pageSize: 4,
     currentPage: 1,
-    currentGenre: ''
+    currentGenreId: ''
   };
 
   
@@ -21,23 +21,22 @@ class MovieTable extends Component {
   }
 
   async componentDidUpdate(prevProps, prevState) {
-    const {currentGenre} = this.state
+    const {currentGenreId} = this.state
 
-    if(currentGenre !== prevState.currentGenre & currentGenre === "reset") {
+    if(currentGenreId !== prevState.currentGenreId & currentGenreId === "reset") {
       this.setState({movies: getMovies()})
       return
     }
   
-    if(currentGenre !== prevState.currentGenre) {
-      await this.setState({movies: getMovies()})
-      let filteredMovies = this.state.movies.filter(movie => movie.genre.name === currentGenre)
+    if(currentGenreId !== prevState.currentGenreId) {
+      await this.setState({currentPage: 1})
+      let filteredMovies = getMovies().filter(movie => movie.genre._id === currentGenreId)
       this.setState({movies:filteredMovies})
     }
   }
   
 
   handleDelete = (movieId) => {
-    console.log('You are trying to delete, WHy ?', movieId);
     const moviesWithoutTheOneWeDeleted = this.state.movies.filter((m) => m._id !== movieId);
     this.setState({ movies: moviesWithoutTheOneWeDeleted });
   };
@@ -46,12 +45,18 @@ class MovieTable extends Component {
     this.setState({currentPage: pageNum})
   }
 
-  handleGenreChange = (genreName) => {
-    this.setState({currentGenre: genreName})
+  handleGenreChange = (genreId) => {
+    this.setState({currentGenreId: genreId})
+  }
+
+  showPPSelectHandler = (e) => {
+    
+    this.setState({pageSize: +e.target.value})
+
   }
 
   render() {
-    const { movies: mv, currentPage, pageSize, genres, currentGenre } = this.state;
+    const { movies: mv, currentPage, pageSize, genres, currentGenreId } = this.state;
     if (mv.length === 0)
       return <div className="alert alert-warning">There are no movies at the moment</div>;
 
@@ -59,11 +64,32 @@ class MovieTable extends Component {
     
 
     return (
-      <div className="movie"><h3 className='mb-5'>Please see out movies</h3><div className="row">
-        <div className="col-3"><ListGroup onHandleGenreChange={this.handleGenreChange} genres={genres} currentGenre={currentGenre}/></div>
+      <div className="movie"><h3 className='mb-5'>Please see our movies</h3><div className="row">
+        <div className="col-3">
+          <ListGroup 
+        textProperty="name" 
+        valueProperty="_id" 
+        onHandleGenreChange={this.handleGenreChange} 
+        genres={genres} 
+        currentGenreId={currentGenreId}
+        />
+        </div>
         <div className="col">
           
-          <p>Showing {mv.length} movies in out store</p>
+          <div className="d-flex justify-content-between">
+            <p>Showing {mv.length} movies in our store</p>
+            
+            <div>
+              <label className='mr-2 '>Show per page</label>
+              <select  onChange={this.showPPSelectHandler} className="form-select" aria-label="Default select example">
+                <option value="4">4</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </div>
+
           <table className="table table-striped ">
           <thead>
             <tr>
@@ -93,4 +119,4 @@ class MovieTable extends Component {
   
 }
 
-export default MovieTable;
+export default Movies;

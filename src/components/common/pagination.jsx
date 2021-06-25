@@ -21,7 +21,7 @@ export default function Pagination(props) {
     <nav>
       <ul className="pagination">
         {pages().map(pageNum => 
-          <li key={pageNum} className={"page-item " + (currentPage === pageNum && " active") } >
+          <li key={pageNum} className={"page-item " + (currentPage === pageNum ? " active" : '') } >
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a onClick={ ()=>{onHandlePageChange(pageNum)} }  className='page-link'>{pageNum}</a>
           </li>)}
